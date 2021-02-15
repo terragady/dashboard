@@ -4,7 +4,7 @@ import './App.css';
 import config from './config';
 document.title = "Yallow Life Science - DashBoard";
 
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1!A:B&majorDimension=COLUMNS&ranges=Sheet1!D:N&ranges=Sheet1!P:Y&ranges=Sheet1!AB:AF&key=${config.apiKey}`;
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?majorDimension=COLUMNS&ranges=Sheet1!D:N&ranges=Sheet1!P:Y&ranges=Sheet1!AB:AF&key=${config.apiKey}`;
 const instaUrl = 'https://www.instagram.com/yallowlifescience/channel/?__a=1';
 
 
@@ -45,7 +45,7 @@ console.log(sheet)
         </p>
         Instagram Followers: {insta.foll} <br />
         Instagram Posts: {insta.posts} <br />
-        { sheet && sheet.valueRanges ? JSON.stringify(sheet.valueRanges[0]) : "Loading..." }
+        { sheet && sheet.valueRanges ? JSON.stringify(sheet.valueRanges[0].values[0]) : "Loading..." }
 
       </header>
     </div>

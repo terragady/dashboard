@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import config from './config';
 import { BarChart } from './Components/BarChart';
+import { LineChart } from './Components/LineChart';
+import { Line } from 'chartist';
 
 
 document.title = "Yallow Life Science - DashBoard";
@@ -9,26 +11,31 @@ document.title = "Yallow Life Science - DashBoard";
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?majorDimension=COLUMNS&ranges=Sheet1!D:N&ranges=Sheet1!P:Y&ranges=Sheet1!AB:AF&key=${config.apiKey}`;
 const instaUrl = 'https://www.instagram.com/yallowlifescience/channel/?__a=1';
 function App() {
-  const [sheet, setSheet] = useState({
-  });
+  const [sheet, setSheet] = useState({});
+  const [overallAvg, setOverallAvg] = useState({});
   const [insta, setInsta] = useState({ foll: 0, posts: 0 });
 
 
   const fetchFromSheets = () => {
     fetch(url).then(response => response.json()).then(data => {
       let datasets = [];
+      let overallAvg = [];
       data.valueRanges[1].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - 25) { return }
         for (let l = 1; l < data.valueRanges[1].values.length; l++) {
           // skip the names stated here
-          if (data.valueRanges[1].values[l][0] === "Overall Avg. IR" || data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
+          if (data.valueRanges[1].values[l][0] === "Overall Avg. IR") {
+            overallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
+          }
+          if (data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
           } else {
             datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
           }
         }
       })
       setSheet(datasets)
+      setOverallAvg(overallAvg)
       console.log(datasets)
 
 
@@ -82,9 +89,11 @@ function App() {
         </p>
         Instagram Followers: {insta.foll} <br />
         Instagram Posts: {insta.posts} <br />
-      <div style={{ height: "30vh", width: "50%", border: "1px solid red", borderRadius: "10px", padding: "10px", backgroundColor: "rgba(0,0,0,0.05)", margin: "10px" }}>
-        <BarChart data={sheet}/>
-        
+      <div className="chart-box chart-hour">
+        <BarChart data={sheet} />
+      </div>
+      <div className="chart-box chart-hour">
+        <LineChart data={overallAvg} />
       </div>
     </div>
   );

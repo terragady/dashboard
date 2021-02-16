@@ -3,11 +3,14 @@ import {
   Chart,
   Tooltip,
   Interval,
+  Point,
 } from "bizcharts";
 
 export const BarChart = ({ data }) => {
+
+
   return (
-    <Chart padding="auto" data={data} autoFit>
+    <Chart  padding="auto" data={data} autoFit interactions={['element-active']}>
       <Interval
         adjust={[
           {
@@ -17,6 +20,7 @@ export const BarChart = ({ data }) => {
         ]}
         color="name"
         position="week*value"
+        // label="value"
       />
       <Tooltip shared />
     </Chart>

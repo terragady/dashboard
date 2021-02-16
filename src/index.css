@@ -65,6 +65,17 @@ code {
   flex-direction: column;
 }
 
+.tooltip {
+  text-align: left;
+  padding: 1vh;
+  border: 1px solid red;
+  margin: 0;
+}
+
+.bizcharts-tooltip {
+  padding: 0 !important;
+}
+
 @media only screen and (max-width: 700px) {
   .first-row, .second-row {
     flex-direction: column;

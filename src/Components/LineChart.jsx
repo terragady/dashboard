@@ -20,7 +20,7 @@ export const LineChart = ({ data }) => {
     }
   }
   return (
-    <Chart padding={[10,20,50,40]} scale={scale} data={data} autoFit interactions={['element-active']}>
+    <Chart padding="auto" scale={scale} data={data} autoFit interactions={['element-active']}>
       <Line shape="smooth" position="week*value" />
       <Point position="week*value" />
       
@@ -28,7 +28,7 @@ export const LineChart = ({ data }) => {
       <Tooltip shared showCrosshairs />
       <Slider
 				start={0.3}
-				padding={[0, 0, 0, 0]}
+				padding={[20, 10, 10, 10]}
 				
 			/>
     </Chart>

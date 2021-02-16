@@ -12,22 +12,23 @@ code {
 }
 
 .card-big {
-  flex-grow: 3;
   height: 30vh;
   width: 70%;
   border: 1px solid red;
   border-radius: 10px;
   padding: 20px;
+  padding-bottom: 30px;
   background-color: rgba(255,255,255,1);
   margin: 10px
 }
 .card-medium {
-  flex-grow: 1;
   height: 30vh;
   width: 30%;
   border: 1px solid red;
   border-radius: 10px;
   padding: 20px;
+  padding-bottom: 30px;
+
   background-color: rgba(255,255,255,1);
   margin: 10px
 }
@@ -46,6 +47,9 @@ code {
 .chart-box {
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center; /* Vertical center alignment */
+  justify-content: center; /* Horizontal center alignment */
 }
 .first-row {
   display: flex;
@@ -59,4 +63,13 @@ code {
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 700px) {
+  .first-row, .second-row {
+    flex-direction: column;
+  }
+  .first-row > div, .second-row > div {
+    width: auto;
+  }
 }

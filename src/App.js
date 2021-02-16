@@ -4,6 +4,8 @@ import config from './config';
 import { BarChart } from './Components/BarChart';
 import { LineChart } from './Components/LineChart';
 import { Line } from 'chartist';
+import BarLoader from "react-spinners/PulseLoader";
+
 
 
 document.title = "Yallow Life Science - DashBoard";
@@ -60,20 +62,20 @@ function App() {
       <div className="first-row">
         <div className="card-small">
           <div className="card-title">Instagram Followers:</div>
-          <div className="card-value">{insta.foll}</div>
+          <div className="card-value">{insta.foll ? insta.foll : <BarLoader color="darkgrey" size={12} />}</div>
         </div>
         <div className="card-small">
           <div className="card-title">Instagram Posts:</div>
-          <div className="card-value">{insta.posts}</div>
+          <div className="card-value">{insta.posts ? insta.posts : <BarLoader color="darkgrey" size={12} />}</div>
         </div>
       </div>
       <div className="second-row">
         <div className="card-big">
           <div className="card-title">
-            Overall Average Invoice Rate
+            Invoice Rate
           </div>
           <div className="chart-box">
-            <BarChart data={sheet} />
+            {sheet[1] ? <BarChart data={sheet} /> : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>
         <div className="card-medium">
@@ -81,7 +83,9 @@ function App() {
             Overall Average Invoice Rate
           </div>
           <div className="chart-box">
-            <LineChart data={overallAvg} />
+            {overallAvg[1] ? <LineChart data={overallAvg} />
+              : <BarLoader color="darkgrey" size={20} />}
+
           </div>
         </div>
       </div>

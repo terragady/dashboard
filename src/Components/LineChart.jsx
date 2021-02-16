@@ -6,38 +6,31 @@ import {
   Point,
   Line,
   Axis,
+  Slider,
 } from "bizcharts";
 
 export const LineChart = ({ data }) => {
 
   const scale = {
     value: {
-      min: 20, max: 80, formatter: function (val) {
+      alias: "Average IR",
+      max: 80, formatter: function (val) {
         return val + "%";
-      }
-    },
-    name: {
-      formatter: v => {
-        return {
-          'Overall Avg. IR': 'Average invoice rate'
-        }[v]
       }
     }
   }
   return (
-    <Chart padding="auto" scale={scale} data={data} autoFit interactions={['element-active']}>
-      <Line shape="smooth" position="week*value" color="name" label="value" />
-      <Point position="week*value" color="name" />
-      <Axis
-        name="value"
-        label={{
-          formatter: function (val) {
-            return val + "%";
-          }
-        }}
-      />
+    <Chart padding={[10,20,50,40]} scale={scale} data={data} autoFit interactions={['element-active']}>
+      <Line shape="smooth" position="week*value" />
+      <Point position="week*value" />
+      
 
-      <Tooltip shared />
+      <Tooltip shared showCrosshairs />
+      <Slider
+				start={0.3}
+				padding={[0, 0, 0, 0]}
+				
+			/>
     </Chart>
 
   )

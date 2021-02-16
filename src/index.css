@@ -4,20 +4,59 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.chart-box {
+.card-big {
+  flex-grow: 3;
   height: 30vh;
-  width: 50%;
+  width: 70%;
   border: 1px solid red;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
+  background-color: rgba(255,255,255,1);
+  margin: 10px
+}
+.card-medium {
+  flex-grow: 1;
+  height: 30vh;
+  width: 30%;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 20px;
   background-color: rgba(255,255,255,1);
   margin: 10px
 }
 
-.chart-hour {}
+.card-small {
+  flex-grow: 1;
+  height: 5vh;
+  min-width: 150px;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgba(255,255,255,1);
+  margin: 10px
+}
+
+.chart-box {
+  height: 100%;
+  width: 100%;
+}
+.first-row {
+  display: flex;
+  flex-direction: row;
+}
+.second-row {
+  display: flex;
+  flex-direction: row;
+}
+.card-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}

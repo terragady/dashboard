@@ -4,9 +4,11 @@ import {
   Tooltip,
   Interval,
   Point,
+  Slider,
 } from "bizcharts";
 
 export const BarChart = ({ data }) => {
+
   const scale = {
     value: {
        formatter: function (val) {
@@ -15,7 +17,8 @@ export const BarChart = ({ data }) => {
     }}
 
   return (
-    <Chart  padding="auto" scale={scale} data={data} autoFit interactions={['element-active']}>
+    <Chart padding="auto" scale={scale} data={data} autoFit interactions={['active-region']} filter={[
+			['value', val => val > 0.1] ]}>
       <Interval
         adjust={[
           {
@@ -25,10 +28,16 @@ export const BarChart = ({ data }) => {
         ]}
         color="name"
         position="week*value"
-        // label="value"
+
       />
       <Tooltip shared />
+      <Slider
+				start={0.3}
+				padding={[5, 5, 5, 5]}
+			/>
     </Chart>
 
   )
 }
+
+

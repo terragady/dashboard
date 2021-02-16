@@ -28,7 +28,7 @@ function App() {
           if (data.valueRanges[1].values[l][0] === "Overall Avg. IR") {
             overallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
           }
-          if (data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
+          else if (data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
           } else {
             datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
           }
@@ -36,33 +36,6 @@ function App() {
       })
       setSheet(datasets)
       setOverallAvg(overallAvg)
-      console.log(datasets)
-
-
-      // data.valueRanges[1].values.forEach((e, i) => {
-      //   if (e[0] === "Overall Avg. IR") {return}
-      //   if (i === 0) {
-      //     e.forEach((e, i) => {
-      //       if (i === 0) { return }
-      //       weekLabels = [...weekLabels, e];
-      //     })
-      //   } else {
-      //     let tempData = {
-      //       label: "", data: [], backgroundColor: colors.shift(), hoverBackgroundColor: colors2.shift(), borderWidth: 1,
-      //       // , hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      //       // hoverBorderColor: 'rgba(255,99,132,1)', backgroundColor: `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}` 
-      //     }
-      //     e.forEach((e, i) => {
-      //       if (i === 0) { tempData.label = e } else {
-      //         tempData['data'].push(e);
-      //       }
-
-      //     })
-      //     datasets = [...datasets, tempData]
-      //   }
-      // });
-      // // data.valueRanges[1].values[0]
-      // setSheet({ hours: { labels: weekLabels, datasets } });
     })
   }
 
@@ -83,17 +56,34 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <p>
-        Yallow dashboard will be here!
-        </p>
-        Instagram Followers: {insta.foll} <br />
-        Instagram Posts: {insta.posts} <br />
-      <div className="chart-box chart-hour">
-        <BarChart data={sheet} />
+    <div className="card-wrapper">
+      <div className="first-row">
+        <div className="card-small">
+          <div className="card-title">Instagram Followers:</div>
+          <div className="card-value">{insta.foll}</div>
+        </div>
+        <div className="card-small">
+          <div className="card-title">Instagram Posts:</div>
+          <div className="card-value">{insta.posts}</div>
+        </div>
       </div>
-      <div className="chart-box chart-hour">
-        <LineChart data={overallAvg} />
+      <div className="second-row">
+        <div className="card-big">
+          <div className="card-title">
+            Overall Average Invoice Rate
+          </div>
+          <div className="chart-box">
+            <BarChart data={sheet} />
+          </div>
+        </div>
+        <div className="card-medium">
+          <div className="card-title">
+            Overall Average Invoice Rate
+          </div>
+          <div className="chart-box">
+            <LineChart data={overallAvg} />
+          </div>
+        </div>
       </div>
     </div>
   );

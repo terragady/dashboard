@@ -7,10 +7,15 @@ import {
 } from "bizcharts";
 
 export const BarChart = ({ data }) => {
-
+  const scale = {
+    value: {
+       formatter: function (val) {
+        return val + "%";
+      }
+    }}
 
   return (
-    <Chart  padding="auto" data={data} autoFit interactions={['element-active']}>
+    <Chart  padding="auto" scale={scale} data={data} autoFit interactions={['element-active']}>
       <Interval
         adjust={[
           {

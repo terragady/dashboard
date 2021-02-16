@@ -1,14 +1,25 @@
 import React from 'react'
-import { Bar } from 'react-chartjs-2'
+import {
+  Chart,
+  Tooltip,
+  Interval,
+} from "bizcharts";
 
-
-export const BarChart = (props) => {
+export const BarChart = ({ data }) => {
   return (
-    <div>
-      <Bar
-        data={props.data}
-        options={{ responsive: true}}
+    <Chart padding="auto" data={data} autoFit>
+      <Interval
+        adjust={[
+          {
+            type: 'dodge',
+            marginRatio: 0,
+          },
+        ]}
+        color="name"
+        position="week*value"
       />
-    </div>
+      <Tooltip shared />
+    </Chart>
+
   )
 }

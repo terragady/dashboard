@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import config from './config';
 import { BarChart } from './Components/BarChart';
-import {
-  G2,
-  Chart,
-  Tooltip,
-  Interval,
-} from "bizcharts";
+
 
 document.title = "Yallow Life Science - DashBoard";
 
@@ -17,15 +12,20 @@ function App() {
   const [sheet, setSheet] = useState({
   });
   const [insta, setInsta] = useState({ foll: 0, posts: 0 });
-  
-  
+
+
   const fetchFromSheets = () => {
     fetch(url).then(response => response.json()).then(data => {
       let datasets = [];
       data.valueRanges[1].values[0].forEach((e, i) => {
-        if (i === 0) { return }
+        // how many weeks behind
+        if (i === 0 || i < data.valueRanges[1].values[0].length - 25) { return }
         for (let l = 1; l < data.valueRanges[1].values.length; l++) {
-          datasets.push({week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i])})
+          // skip the names stated here
+          if (data.valueRanges[1].values[l][0] === "Overall Avg. IR" || data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
+          } else {
+            datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
+          }
         }
       })
       setSheet(datasets)
@@ -54,7 +54,6 @@ function App() {
       //     datasets = [...datasets, tempData]
       //   }
       // });
-
       // // data.valueRanges[1].values[0]
       // setSheet({ hours: { labels: weekLabels, datasets } });
     })
@@ -78,27 +77,15 @@ function App() {
 
   return (
     <div className="App">
-        <p>
-          Yallow dashboard will be here!
+      <p>
+        Yallow dashboard will be here!
         </p>
         Instagram Followers: {insta.foll} <br />
         Instagram Posts: {insta.posts} <br />
-        <div style={{height: "30vh", width: "50%", border: "1px solid red"}}>
-        {/* <BarChart data={sheet.hours}/> */}
-        <Chart padding="auto" data={sheet} autoFit>
-      <Interval
-        adjust={[
-         {
-            type: 'dodge',
-            marginRatio: 0,
-          },
-        ]}
-        color="name"
-        position="week*value"
-      />
-      <Tooltip shared />
-    </Chart>
-        </div>
+      <div style={{ height: "30vh", width: "50%", border: "1px solid red", borderRadius: "10px", padding: "10px", backgroundColor: "rgba(0,0,0,0.05)", margin: "10px" }}>
+        <BarChart data={sheet}/>
+        
+      </div>
     </div>
   );
 }

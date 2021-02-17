@@ -32,7 +32,7 @@ export const LineChart = ({ data }) => {
       <Tooltip showCrosshairs shared>
     {(title,items) => {
       console.log(items);
-      return <div className="tooltip">Week: {title}<br/><br/>Average Invoice Rate: <b>{items[0].data.value}%</b></div>
+      return <div className="tooltip">Week: {title}<br/><br/>Average Invoice Rate: <b style={{marginLeft: "15px"}}>{items[0].data.value}%</b></div>
     }}
   </Tooltip>
       <Slider

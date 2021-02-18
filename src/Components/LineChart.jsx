@@ -2,9 +2,6 @@ import React from 'react'
 import {
   Chart,
   Tooltip,
-  Interval,
-  Point,
-  Line,
   Axis,
   Slider,
   LineAdvance
@@ -32,7 +29,6 @@ export const LineChart = ({ data }) => {
       {/* <Tooltip shared showCrosshairs /> */}
       <Tooltip showCrosshairs shared>
     {(title,items) => {
-      console.log(items);
       return <div className="tooltip">Week: {title}<br/><br/>Average Invoice Rate: <b style={{marginLeft: "15px"}}>{items[0].data.value}%</b></div>
     }}
   </Tooltip>

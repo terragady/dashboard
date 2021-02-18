@@ -94,6 +94,10 @@ body {
   display: flex;
   flex-direction: row;
 }
+.fourth-row {
+  display: flex;
+  flex-direction: row;
+}
 
 .card-wrapper {
   text-align: center;
@@ -115,10 +119,10 @@ body {
 }
 
 @media only screen and (max-width: 700px) {
-  .second-row, .third-row {
+  .second-row, .third-row, .fourth-row {
     flex-direction: column;
   }
-  .second-row>div, .third-row>div {
+  .second-row>div, .third-row>div, .fourth-row>div {
     width: auto;
   }
   .card-small {

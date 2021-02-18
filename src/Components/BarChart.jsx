@@ -3,15 +3,20 @@ import {
   Chart,
   Tooltip,
   Interval,
-  Point,
   Slider,
-  Axis,
+  LineAdvance
+
 } from "bizcharts";
 
 export const BarChart = ({ data }) => {
 
   const scale = {
     value: {
+      formatter: function (val) {
+        return val + "%";
+      }
+    },
+    avg: {
       formatter: function (val) {
         return val + "%";
       }

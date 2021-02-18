@@ -4,7 +4,7 @@ import './App.css';
 import { BarChart } from './Components/BarChart';
 import { SocialBarChart } from './Components/SocialBarChart';
 import { LineChart } from './Components/LineChart';
-import { Line } from 'chartist';
+import { FinanceChart } from './Components/FinanceChart';
 import BarLoader from "react-spinners/PulseLoader";
 
 
@@ -19,6 +19,7 @@ function App() {
   const [insta, setInsta] = useState({ foll: 0, posts: 0 });
   const [linked, setLinked] = useState(0);
   const [diffData, setDiffData] = useState(0);
+  const [finance, setFinance] = useState(0);
 
 
   const fetchFromSheets = () => {
@@ -37,35 +38,44 @@ function App() {
           }
           else if (data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
           } else {
-            datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
+            datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]), avg: parseFloat(data.valueRanges[1].values[l][i]) })
           }
         }
       })
 
+
+      // Finance
+      let finance = [];
+      data.valueRanges[2].values[0].forEach((e, i) => {
+        // how many weeks behind
+        if (i === 0 || i < data.valueRanges[2].values[0].length - weeksBehind) { return }
+        for (let l = 1; l < data.valueRanges[2].values.length; l++) {
+          finance.push({ month: data.valueRanges[2].values[0][i], name: data.valueRanges[2].values[l][0], value: parseFloat(data.valueRanges[2].values[l][i]) })
+        }
+      })
+      console.log(finance)
 
       //fetch diff data
       let instaNewFollPosts = []
       data.valueRanges[0].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
-        instaNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[1][i]), "name": "New Followers"})
-        instaNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[2][i]), "name": "New Posts"})
+        instaNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[1][i]), "name": "New Followers" })
+        instaNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[2][i]), "name": "New Posts" })
       })
       let linkedNewFollPosts = []
       data.valueRanges[0].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
-        linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[3][i]), "name": "New Followers"})
-        linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[4][i]), "name": "New Posts"})
+        linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[3][i]), "name": "New Followers" })
+        linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[4][i]), "name": "New Posts" })
       })
 
-
+      setFinance(finance);
       setDiffData({ instaNewFollPosts, linkedNewFollPosts })
-
       setLinked({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })
       setSheet(datasets)
       setOverallAvg(overallAvg)
-      console.log(instaNewFollPosts)
     })
   }
 
@@ -149,6 +159,21 @@ function App() {
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>
+      </div>
+
+
+
+      <div className="fourth-row">
+        <div className="card-small-plus">
+          <div className="card-title">
+            Finance
+          </div>
+          <div className="chart-box">
+            {finance[1] ? <FinanceChart data={finance} />
+              : <BarLoader color="darkgrey" size={20} />}
+          </div>
+        </div>
+
       </div>
     </div>
   );

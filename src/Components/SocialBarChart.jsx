@@ -3,9 +3,7 @@ import {
   Chart,
   Tooltip,
   Interval,
-  Point,
   Slider,
-  Axis,
 } from "bizcharts";
 
 export const SocialBarChart = ({ data }) => {

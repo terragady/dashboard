@@ -5,6 +5,7 @@ import { BarChart } from './Components/BarChart';
 import { SocialBarChart } from './Components/SocialBarChart';
 import { LineChart } from './Components/LineChart';
 import { FinanceChart } from './Components/FinanceChart';
+import { SalesChart } from './Components/SalesChart';
 import BarLoader from "react-spinners/PulseLoader";
 
 
@@ -21,6 +22,7 @@ function App() {
   const [diffData, setDiffData] = useState(0);
   const [finance, setFinance] = useState(0);
   const [newLastWeek, setNewLastWeek] = useState(0);
+  const [sales, setSales] = useState(0);
 
 
   const fetchFromSheets = () => {
@@ -79,7 +81,16 @@ function App() {
         linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[3][i]), "name": "New Followers" })
         linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[4][i]), "name": "New Posts" })
       })
+      let sales = []
+      data.valueRanges[0].values[0].forEach((e, i) => {
+        // how many weeks behind
+        if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
+        sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[6][i]), "name": "New Leads" })
+        sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[5][i]), "name": "Sales Meetings" })
+        sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[7][i]), "name": "Meetings Booked" })
+      })
 
+      setSales(sales);
       setFinance(finance);
       setDiffData({ instaNewFollPosts, linkedNewFollPosts })
       setLinked({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })
@@ -179,6 +190,15 @@ function App() {
           </div>
           <div className="chart-box">
             {finance[1] ? <FinanceChart data={finance} />
+              : <BarLoader color="darkgrey" size={20} />}
+          </div>
+        </div>
+        <div className="card-small-plus">
+          <div className="card-title">
+            Sales
+          </div>
+          <div className="chart-box">
+            {finance[1] ? <SalesChart data={sales} />
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>

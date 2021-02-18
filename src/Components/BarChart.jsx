@@ -16,11 +16,6 @@ export const BarChart = ({ data }) => {
         return val + "%";
       }
     },
-    avg: {
-      formatter: function (val) {
-        return val + "%";
-      }
-    },
     week:{ formatter: function (val){return "Week " + val;}}
   }
 
@@ -39,7 +34,7 @@ export const BarChart = ({ data }) => {
 
       />
       <Tooltip shared scale={{week:{ formatter: function (val){return "Week" + val;}}}} />
-      <Slider start={0.3} padding={[5, 5, 5, 5]} />
+      <Slider start={0.3} padding={[5, 15, 5, 5]} data={[1]}/>
 
     </Chart>
 

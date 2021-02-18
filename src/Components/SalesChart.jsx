@@ -4,13 +4,18 @@ import {
   Tooltip,
   Interval,
   Slider,
+  LineAdvance
+
 } from "bizcharts";
 
-export const SocialBarChart = ({ data }) => {
+export const SalesChart = ({ data }) => {
 
+  const scale = {
+    week:{ formatter: function (val){return "Week " + val;}}
+  }
 
   return (
-    <Chart padding="auto" data={data} autoFit interactions={['active-region']} >
+    <Chart padding="auto" scale={scale} data={data} autoFit interactions={['active-region']} >
       <Interval
         adjust={[
           {
@@ -23,7 +28,7 @@ export const SocialBarChart = ({ data }) => {
 
       />
       <Tooltip shared scale={{week:{ formatter: function (val){return "Week" + val;}}}} />
-      <Slider start={0.5} padding={[5, 15, 5, 5]} />
+      <Slider start={0.3} padding={[5, 15, 5, 5]} />
 
     </Chart>
 

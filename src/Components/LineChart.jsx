@@ -34,7 +34,7 @@ export const LineChart = ({ data }) => {
   </Tooltip>
       <Slider
 				start={0.3}
-				padding={[20, 10, 10, 10]}
+				padding={[5, 15, 5, 5]}
 			/>
     </Chart>
 

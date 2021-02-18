@@ -20,6 +20,7 @@ function App() {
   const [linked, setLinked] = useState(0);
   const [diffData, setDiffData] = useState(0);
   const [finance, setFinance] = useState(0);
+  const [newLastWeek, setNewLastWeek] = useState(0);
 
 
   const fetchFromSheets = () => {
@@ -41,6 +42,14 @@ function App() {
             datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]), avg: parseFloat(data.valueRanges[1].values[l][i]) })
           }
         }
+      })
+
+
+      setNewLastWeek({
+        instaFoll: data.valueRanges[0].values[1][data.valueRanges[0].values[1].length - 1],
+        instaPost: data.valueRanges[0].values[2][data.valueRanges[0].values[2].length - 1],
+        linkedFoll: data.valueRanges[0].values[3][data.valueRanges[0].values[3].length - 1],
+        linkedPost: data.valueRanges[0].values[4][data.valueRanges[0].values[4].length - 1]
       })
 
 
@@ -100,7 +109,7 @@ function App() {
       <div className="first-row">
         <div className="card-small">
           <div className="card-title">Instagram Followers:</div>
-          <div className="card-value">{insta.foll ? insta.foll : <BarLoader color="darkgrey" size={12} />}</div>
+          <div className="card-value">{insta.foll ? insta.foll + ` (${newLastWeek.instaFoll})` : <BarLoader color="darkgrey" size={12} />}</div>
         </div>
         <div className="card-small">
           <div className="card-title">Instagram Posts:</div>
@@ -112,7 +121,7 @@ function App() {
         </div>
         <div className="card-small">
           <div className="card-title">LinkedIn Posts:</div>
-          <div className="card-value">{linked.posts ? linked.posts : <BarLoader color="darkgrey" size={12} />}</div>
+          <div className="card-value">{linked.posts ? linked.posts + ` (${newLastWeek.linkedPost})`: <BarLoader color="darkgrey" size={12} />}</div>
         </div>
       </div>
 

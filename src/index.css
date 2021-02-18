@@ -6,6 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 15px;
+  height: 100%;
 }
 
 .card-big {
@@ -66,7 +67,6 @@ body {
   padding-bottom: 10px;
   font-weight: 600;
   color: rgb(51, 51, 51);
-
 }
 
 .chart-box {

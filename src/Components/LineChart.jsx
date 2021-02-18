@@ -23,7 +23,8 @@ export const LineChart = ({ data }) => {
     }
   }
   return (
-    <Chart padding="auto" scale={scale} data={data} autoFit >
+    <Chart padding="auto" scale={scale} data={data} autoFit filter={[
+      ['value', val => val > 0.1]]}>
       {/* <Line shape="smooth" position="week*value" /> */}
       <LineAdvance area shape="smooth" position="week*value" size={2} color="blue" point={{size:3}}/>
       {/* <Point position="week*value" stroke="blue"/> */}

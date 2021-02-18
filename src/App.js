@@ -109,7 +109,7 @@ function App() {
 
 
       <div className="second-row">
-        <div className="card-medium">
+        <div className="card-small-plus">
           <div className="card-title">
             Instagram New Followers and Posts
           </div>
@@ -118,7 +118,7 @@ function App() {
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>
-        <div className="card-medium">
+        <div className="card-small-plus">
           <div className="card-title">
             LinkedIn New Followers and Posts
           </div>

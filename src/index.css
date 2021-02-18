@@ -59,6 +59,10 @@ code {
   display: flex;
   flex-direction: row;
 }
+.third-row {
+  display: flex;
+  flex-direction: row;
+}
 .card-wrapper {
   text-align: center;
   display: flex;
@@ -85,10 +89,10 @@ code {
 }
 
 @media only screen and (max-width: 700px) {
-  .first-row, .second-row {
+  .first-row, .second-row, .third-row {
     flex-direction: column;
   }
-  .first-row > div, .second-row > div {
+  .first-row > div, .second-row > div, .third-row > div {
     width: auto;
   }
 }

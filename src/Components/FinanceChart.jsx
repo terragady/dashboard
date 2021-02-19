@@ -24,7 +24,6 @@ export const FinanceChart = ({ data }) => {
         ]}
         color="name"
         position="month*value"
-
       />
       <Tooltip shared />
     </Chart>

@@ -6,6 +6,7 @@ import { SocialBarChart } from './Components/SocialBarChart';
 import { LineChart } from './Components/LineChart';
 import { FinanceChart } from './Components/FinanceChart';
 import { SalesChart } from './Components/SalesChart';
+import { OffersChart } from './Components/OffersChart';
 import BarLoader from "react-spinners/PulseLoader";
 
 
@@ -23,6 +24,7 @@ function App() {
   const [finance, setFinance] = useState(0);
   const [newLastWeek, setNewLastWeek] = useState(0);
   const [sales, setSales] = useState(0);
+  const [offers, setOffers] = useState(0);
 
 
   const fetchFromSheets = () => {
@@ -90,6 +92,14 @@ function App() {
         sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[7][i]), "name": "Meetings Booked" })
       })
 
+      let offers = []
+      data.valueRanges[0].values[0].forEach((e, i) => {
+        // how many weeks behind
+        if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
+        offers.push({ "week": e, "value1": parseInt(data.valueRanges[0].values[8][i]),"value": parseInt(data.valueRanges[0].values[9][i]), "name1": "Offers","name": "Sales Meetings" })
+      })
+      console.log(offers)
+      setOffers(offers)
       setSales(sales);
       setFinance(finance);
       setDiffData({ instaNewFollPosts, linkedNewFollPosts })
@@ -128,11 +138,11 @@ function App() {
         </div>
         <div className="card-small">
           <div className="card-title">LinkedIn Followers:</div>
-          <div className="card-value">{linked.foll ? linked.foll : <BarLoader color="darkgrey" size={12} />}</div>
+          <div className="card-value">{linked.foll ? linked.foll  + ` (${newLastWeek.linkedFoll})`: <BarLoader color="darkgrey" size={12} />}</div>
         </div>
         <div className="card-small">
           <div className="card-title">LinkedIn Posts:</div>
-          <div className="card-value">{linked.posts ? linked.posts + ` (${newLastWeek.linkedPost})`: <BarLoader color="darkgrey" size={12} />}</div>
+          <div className="card-value">{linked.posts ? linked.posts: <BarLoader color="darkgrey" size={12} />}</div>
         </div>
       </div>
 
@@ -199,6 +209,15 @@ function App() {
           </div>
           <div className="chart-box">
             {finance[1] ? <SalesChart data={sales} />
+              : <BarLoader color="darkgrey" size={20} />}
+          </div>
+        </div>
+        <div className="card-small-plus">
+          <div className="card-title">
+            Offers
+          </div>
+          <div className="chart-box">
+            {finance[1] ? <OffersChart data={offers} />
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>

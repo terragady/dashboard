@@ -33,14 +33,14 @@ function App() {
       const weeksBehind = 25
       // fetch hours
       let datasets = [];
-      let overallAvg = [];
+      let NewOverallAvg = [];
       data.valueRanges[1].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
         for (let l = 1; l < data.valueRanges[1].values.length; l++) {
           // skip the names stated here
           if (data.valueRanges[1].values[l][0] === "Overall Avg. IR") {
-            overallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]), value1: parseFloat(data.valueRanges[1].values[l][i]) })
+            NewOverallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]), value1: parseFloat(data.valueRanges[1].values[l][i]) })
           }
           else if (data.valueRanges[1].values[l][0] === "Employee 7") {
           } else {
@@ -59,20 +59,20 @@ function App() {
 
 
       // Finance
-      let finance = { rest: [], acc: [] };
+      let NEW_Finance = { rest: [], acc: [] };
       data.valueRanges[2].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[2].values[0].length - weeksBehind) { return }
         for (let l = 1; l < 5; l++) {
-          if (l === 2){} 
-          else if (l === 4){
-            finance['acc'].push({
+          if (l === 2) { }
+          else if (l === 4) {
+            NEW_Finance['acc'].push({
               month: e,
               name: data.valueRanges[2].values[l][0],
               value: parseFloat(data.valueRanges[2].values[l][i]),
             })
           } else {
-            finance['rest'].push({
+            NEW_Finance['rest'].push({
               month: e,
               name: data.valueRanges[2].values[l][0],
               value: parseFloat(data.valueRanges[2].values[l][i]),
@@ -82,7 +82,7 @@ function App() {
         }
       }
       )
-      console.log(finance)
+      console.log(NEW_Finance)
 
 
       //fetch diff data
@@ -100,41 +100,40 @@ function App() {
         linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[3][i]), "name": "New Followers" })
         linkedNewFollPosts.push({ "week": e, "value": parseInt(data.valueRanges[0].values[4][i]), "name": "New Posts" })
       })
-      let sales = []
+      let newSales = []
       data.valueRanges[0].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
-        sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[6][i]), "name": "New Leads" })
-        sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[5][i]), "name": "Sales Meetings" })
-        sales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[7][i]), "name": "Meetings Booked" })
+        newSales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[6][i]), "name": "New Leads" })
+        newSales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[5][i]), "name": "Sales Meetings" })
+        newSales.push({ "week": e, "value": parseInt(data.valueRanges[0].values[7][i]), "name": "Meetings Booked" })
       })
 
-      let offers = []
+      let NEWoffers = []
       data.valueRanges[0].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
-        offers.push({ name: "Offers sent", "week": e, "value": parseInt(data.valueRanges[0].values[8][i]) })
+        NEWoffers.push({ name: "Offers sent", "week": e, "value": parseInt(data.valueRanges[0].values[8][i]) })
         let wins = data.valueRanges[0].values[10][i] ? data.valueRanges[0].values[10][i] : 0
-        offers.push({ name: "Wins", "week": e, "value": parseInt(wins) })
+        NEWoffers.push({ name: "Wins", "week": e, "value": parseInt(wins) })
       })
 
-
-
-      console.log(offers)
-      setOffers(offers)
-      setSales(sales);
-      setFinance(finance);
-      setDiffData({ instaNewFollPosts, linkedNewFollPosts })
-      setLinked({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })
-      setSheet(datasets)
-      setOverallAvg(overallAvg)
+      if (JSON.stringify(offers) !== JSON.stringify(NEWoffers)){setOffers(NEWoffers)}
+      if (JSON.stringify(sales) !== JSON.stringify(newSales)){setSales(newSales);}
+        if (JSON.stringify(finance) !== JSON.stringify(NEW_Finance)){setFinance(NEW_Finance);}
+          if (JSON.stringify(diffData) !== JSON.stringify({ instaNewFollPosts, linkedNewFollPosts })){setDiffData({ instaNewFollPosts, linkedNewFollPosts })}
+          if (JSON.stringify(linked) !== JSON.stringify({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })){setLinked({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })}
+          if (JSON.stringify(sheet) !== JSON.stringify(datasets)){setSheet(datasets)}
+            if (JSON.stringify(overallAvg) !== JSON.stringify(NewOverallAvg)){setOverallAvg(NewOverallAvg)}
     })
   }
 
   const fetchFromInstagram = () => {
-    fetch(instaUrl, {mode:'cors'}).then(response => response.json()).then(data => {
-      setInsta({ foll: data.graphql.user.edge_followed_by.count, posts: data.graphql.user.edge_owner_to_timeline_media.count });
-    })
+    fetch(instaUrl).then(response => response.json()).then(data => {
+      if (insta.foll !== data.graphql.user.edge_followed_by.count || insta.posts !== data.graphql.user.edge_owner_to_timeline_media.coun) {
+        setInsta({ foll: data.graphql.user.edge_followed_by.count, posts: data.graphql.user.edge_owner_to_timeline_media.count });
+      }
+    }).catch(err => console.log("Fetch Error: " + err))
   }
   useEffect(() => {
     fetchFromSheets();
@@ -142,7 +141,11 @@ function App() {
     const interval = setInterval(() => {
       fetchFromSheets();
       fetchFromInstagram();
-    }, 300000);
+    }, 
+    // 5000
+    3600000
+    // 300000
+    );
 
     return () => clearInterval(interval)
   }, [])

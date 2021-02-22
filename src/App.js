@@ -40,7 +40,7 @@ function App() {
         for (let l = 1; l < data.valueRanges[1].values.length; l++) {
           // skip the names stated here
           if (data.valueRanges[1].values[l][0] === "Overall Avg. IR") {
-            overallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
+            overallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]), value1: parseFloat(data.valueRanges[1].values[l][i]) })
           }
           else if (data.valueRanges[1].values[l][0] === "Employee 7") {
           } else {
@@ -59,15 +59,31 @@ function App() {
 
 
       // Finance
-      let finance = [];
+      let finance = { rest: [], acc: [] };
       data.valueRanges[2].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[2].values[0].length - weeksBehind) { return }
-        for (let l = 1; l < data.valueRanges[2].values.length; l++) {
-          finance.push({ month: data.valueRanges[2].values[0][i], name: data.valueRanges[2].values[l][0], value: parseFloat(data.valueRanges[2].values[l][i]) })
+        for (let l = 1; l < 5; l++) {
+          if (l === 2){} 
+          else if (l === 4){
+            finance['acc'].push({
+              month: e,
+              name: data.valueRanges[2].values[l][0],
+              value: parseFloat(data.valueRanges[2].values[l][i]),
+            })
+          } else {
+            finance['rest'].push({
+              month: e,
+              name: data.valueRanges[2].values[l][0],
+              value: parseFloat(data.valueRanges[2].values[l][i]),
+
+            })
+          }
         }
-      })
+      }
+      )
       console.log(finance)
+
 
       //fetch diff data
       let instaNewFollPosts = []
@@ -97,9 +113,9 @@ function App() {
       data.valueRanges[0].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
-        offers.push({ name:"Offers sent","week": e, "value": parseInt(data.valueRanges[0].values[8][i])})
+        offers.push({ name: "Offers sent", "week": e, "value": parseInt(data.valueRanges[0].values[8][i]) })
         let wins = data.valueRanges[0].values[10][i] ? data.valueRanges[0].values[10][i] : 0
-        offers.push({ name:"Wins","week": e, "value": parseInt(wins )})
+        offers.push({ name: "Wins", "week": e, "value": parseInt(wins) })
       })
 
 
@@ -133,9 +149,12 @@ function App() {
 
   return (
     <div className="card-wrapper">
-        <div className="header-row">
-          <Clock />
-        </div>
+      <div className="header-row">
+      <div className="clock-card logo">
+
+      </div>
+        <Clock />
+      </div>
       <div className="second-row">
         <div className="card-small-plus">
           <div className="card-title">
@@ -147,25 +166,25 @@ function App() {
           </div>
         </div>
         <div className="first-row">
-        <div className="card-small">
-          <div className="card-title">Instagram Followers:</div>
-          <div className="card-value">{insta.foll ? insta.foll + ` (${newLastWeek.instaFoll})` : <BarLoader color="darkgrey" size={12} />}</div>
-        </div>
-        <div className="card-small">
-          <div className="card-title">Instagram Posts:</div>
-          <div className="card-value">{insta.posts ? insta.posts : <BarLoader color="darkgrey" size={12} />}</div>
-        </div>        </div>        <div className="first-row">
+          <div className="card-small">
+            <div className="card-title">Instagram Followers:</div>
+            <div className="card-value">{insta.foll ? insta.foll + ` (${newLastWeek.instaFoll})` : <BarLoader color="darkgrey" size={12} />}</div>
+          </div>
+          <div className="card-small">
+            <div className="card-title">Instagram Posts:</div>
+            <div className="card-value">{insta.posts ? insta.posts : <BarLoader color="darkgrey" size={12} />}</div>
+          </div>        </div>        <div className="first-row">
 
 
-        <div className="card-small">
-          <div className="card-title">LinkedIn Followers:</div>
-          <div className="card-value">{linked.foll ? linked.foll  + ` (${newLastWeek.linkedFoll})`: <BarLoader color="darkgrey" size={12} />}</div>
+          <div className="card-small">
+            <div className="card-title">LinkedIn Followers:</div>
+            <div className="card-value">{linked.foll ? linked.foll + ` (${newLastWeek.linkedFoll})` : <BarLoader color="darkgrey" size={12} />}</div>
+          </div>
+          <div className="card-small">
+            <div className="card-title">LinkedIn Posts:</div>
+            <div className="card-value">{linked.posts ? linked.posts : <BarLoader color="darkgrey" size={12} />}</div>
+          </div>
         </div>
-        <div className="card-small">
-          <div className="card-title">LinkedIn Posts:</div>
-          <div className="card-value">{linked.posts ? linked.posts: <BarLoader color="darkgrey" size={12} />}</div>
-        </div>
-      </div>
         <div className="card-small-plus">
           <div className="card-title">
             LinkedIn New Followers and Posts
@@ -207,7 +226,7 @@ function App() {
             Finance
           </div>
           <div className="chart-box">
-            {finance[1] ? <FinanceChart data={finance} />
+            {finance.acc ? <FinanceChart data={finance} />
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>
@@ -216,7 +235,7 @@ function App() {
             Sales
           </div>
           <div className="chart-box">
-            {finance[1] ? <SalesChart data={sales} />
+            {finance.acc ? <SalesChart data={sales} />
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>
@@ -225,7 +244,7 @@ function App() {
             Offers
           </div>
           <div className="chart-box">
-            {finance[1] ? <OffersChart data={offers} />
+            {finance.acc ? <OffersChart data={offers} />
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>

@@ -41,7 +41,7 @@ function App() {
           if (data.valueRanges[1].values[l][0] === "Overall Avg. IR") {
             overallAvg.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]) })
           }
-          else if (data.valueRanges[1].values[l][0] === "Employee 7" || data.valueRanges[1].values[l][0] === "Kamila") {
+          else if (data.valueRanges[1].values[l][0] === "Employee 7") {
           } else {
             datasets.push({ week: data.valueRanges[1].values[0][i], name: data.valueRanges[1].values[l][0], value: parseFloat(data.valueRanges[1].values[l][i]), avg: parseFloat(data.valueRanges[1].values[l][i]) })
           }

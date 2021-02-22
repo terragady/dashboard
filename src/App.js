@@ -132,7 +132,7 @@ function App() {
   }
 
   const fetchFromInstagram = () => {
-    fetch(instaUrl).then(response => response.json()).then(data => {
+    fetch(instaUrl, {mode:'no-cors'}).then(response => response.json()).then(data => {
       setInsta({ foll: data.graphql.user.edge_followed_by.count, posts: data.graphql.user.edge_owner_to_timeline_media.count });
     })
   }

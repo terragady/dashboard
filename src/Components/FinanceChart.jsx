@@ -17,12 +17,12 @@ export const FinanceChart = ({ data }) => {
     value: {
       alias: "Cummulative",
       sync: true,
-      nice: true
+      nice: true,
+      formatter: function (val) { return val / 1000 + "k NOK"; }
     },
     month: { sync: true }
   }
-let chartIns
-let legendMap = {}
+
   return (
     <Chart padding={[20,80,80,80]} scale={scale} data={data.acc} autoFit interactions={['active-region']} >
       <Tooltip shared />

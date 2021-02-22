@@ -13,7 +13,7 @@ export const LineChart = ({ data }) => {
     value: {
       alias: "Average IR",
       min: 0,
-      max: 80, 
+      max: 100, 
       formatter: function (val) {
         return val + "%";
       },

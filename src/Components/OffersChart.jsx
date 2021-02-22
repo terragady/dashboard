@@ -12,20 +12,30 @@ export const OffersChart = ({ data }) => {
 
   const scale = {
     week: { formatter: function (val) { return "Week " + val; } },
-    value1: { formatter: function (val) { return val / 1000 + "k NOK"; } }
+    value: { alias: "Offers sent", formatter: function (val) { return val / 1000 + "k NOK"; } }
 
   }
 
   return (
-    <Chart padding={[0,0,30,69]} scale={scale} data={data} autoFit interactions={['active-region']} >
-      <Tooltip shared={true} showCrosshairs />
+    <Chart padding={[0, 0, 80, 65]} scale={scale} data={data} autoFit interactions={['active-region']} >
+      <Tooltip shared={true}  />
       <Interval
-        position="week*value1"
+        adjust={[
+          {
+            type: 'dodge',
+            marginRatio: 0,
+          },
+        ]}
+        color="name"
+        position="week*value"
 
       />
       {/* <Point position="week*value" /> */}
       {/* <Slider start={0.3} padding={[5, 15, 5, 5]} /> */}
-
+      <Slider
+        start={0.3}
+        padding={[5, 15, 5, 5]}
+      />
     </Chart>
 
   )

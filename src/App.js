@@ -8,6 +8,7 @@ import { FinanceChart } from './Components/FinanceChart';
 import { SalesChart } from './Components/SalesChart';
 import { OffersChart } from './Components/OffersChart';
 import BarLoader from "react-spinners/PulseLoader";
+import Clock from './Components/Clock';
 
 
 
@@ -96,8 +97,13 @@ function App() {
       data.valueRanges[0].values[0].forEach((e, i) => {
         // how many weeks behind
         if (i === 0 || i < data.valueRanges[1].values[0].length - weeksBehind) { return }
-        offers.push({ "week": e, "value1": parseInt(data.valueRanges[0].values[8][i]),"value": parseInt(data.valueRanges[0].values[9][i]), "name1": "Offers","name": "Sales Meetings" })
+        offers.push({ name:"Offers sent","week": e, "value": parseInt(data.valueRanges[0].values[8][i])})
+        let wins = data.valueRanges[0].values[10][i] ? data.valueRanges[0].values[10][i] : 0
+        offers.push({ name:"Wins","week": e, "value": parseInt(wins )})
       })
+
+
+
       console.log(offers)
       setOffers(offers)
       setSales(sales);
@@ -127,27 +133,9 @@ function App() {
 
   return (
     <div className="card-wrapper">
-      <div className="first-row">
-        <div className="card-small">
-          <div className="card-title">Instagram Followers:</div>
-          <div className="card-value">{insta.foll ? insta.foll + ` (${newLastWeek.instaFoll})` : <BarLoader color="darkgrey" size={12} />}</div>
+        <div className="header-row">
+          <Clock />
         </div>
-        <div className="card-small">
-          <div className="card-title">Instagram Posts:</div>
-          <div className="card-value">{insta.posts ? insta.posts : <BarLoader color="darkgrey" size={12} />}</div>
-        </div>
-        <div className="card-small">
-          <div className="card-title">LinkedIn Followers:</div>
-          <div className="card-value">{linked.foll ? linked.foll  + ` (${newLastWeek.linkedFoll})`: <BarLoader color="darkgrey" size={12} />}</div>
-        </div>
-        <div className="card-small">
-          <div className="card-title">LinkedIn Posts:</div>
-          <div className="card-value">{linked.posts ? linked.posts: <BarLoader color="darkgrey" size={12} />}</div>
-        </div>
-      </div>
-
-
-
       <div className="second-row">
         <div className="card-small-plus">
           <div className="card-title">
@@ -158,6 +146,26 @@ function App() {
               : <BarLoader color="darkgrey" size={20} />}
           </div>
         </div>
+        <div className="first-row">
+        <div className="card-small">
+          <div className="card-title">Instagram Followers:</div>
+          <div className="card-value">{insta.foll ? insta.foll + ` (${newLastWeek.instaFoll})` : <BarLoader color="darkgrey" size={12} />}</div>
+        </div>
+        <div className="card-small">
+          <div className="card-title">Instagram Posts:</div>
+          <div className="card-value">{insta.posts ? insta.posts : <BarLoader color="darkgrey" size={12} />}</div>
+        </div>        </div>        <div className="first-row">
+
+
+        <div className="card-small">
+          <div className="card-title">LinkedIn Followers:</div>
+          <div className="card-value">{linked.foll ? linked.foll  + ` (${newLastWeek.linkedFoll})`: <BarLoader color="darkgrey" size={12} />}</div>
+        </div>
+        <div className="card-small">
+          <div className="card-title">LinkedIn Posts:</div>
+          <div className="card-value">{linked.posts ? linked.posts: <BarLoader color="darkgrey" size={12} />}</div>
+        </div>
+      </div>
         <div className="card-small-plus">
           <div className="card-title">
             LinkedIn New Followers and Posts

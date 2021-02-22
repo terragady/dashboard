@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -18,7 +17,6 @@ body {
   padding-bottom: 30px;
   background-color: rgba(255, 255, 255, 1);
   margin: 5px;
-
 }
 
 .card-medium {
@@ -35,7 +33,7 @@ body {
 .card-small-plus {
   flex-grow: 1;
   height: 20vh;
-  width: 20%;
+  width: 40%;
   border: 1px solid red;
   border-radius: 10px;
   padding: 20px;
@@ -47,8 +45,6 @@ body {
 .card-small {
   flex-grow: 1;
   min-height: 5vh;
-  min-width: 150px;
-  width: 15%;
   border: 1px solid red;
   border-radius: 10px;
   padding: 10px;
@@ -57,7 +53,11 @@ body {
 }
 
 .card-value {
-  font-size: 2rem;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
   font-weight: 700;
   color: royalblue;
   line-height: 100%;
@@ -79,10 +79,30 @@ body {
   /* Horizontal center alignment */
 }
 
-.first-row {
+.header-row {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  min-height: 7vh;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  margin: 5px;
+  align-items: center;
+  /* Vertical center alignment */
+  justify-content:space-around
+}
+
+.clock-card {
+  width: 33%;
+}
+
+.first-row {
+  width: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .second-row {
@@ -94,6 +114,7 @@ body {
   display: flex;
   flex-direction: row;
 }
+
 .fourth-row {
   display: flex;
   flex-direction: row;
@@ -119,6 +140,12 @@ body {
 }
 
 @media only screen and (max-width: 700px) {
+  .first-row {
+    order: 0
+  }
+  .card-small-plus {
+    order: 2;
+  }
   .second-row, .third-row, .fourth-row {
     flex-direction: column;
   }

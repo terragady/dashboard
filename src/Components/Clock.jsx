@@ -22,6 +22,8 @@ function Clock() {
   }
   return (
     <>
+      <div className="clock-card logo" />
+
       <div className="clock-card clock">
         <div>
           {
@@ -29,6 +31,7 @@ function Clock() {
               .format(date)
           }</div>
       </div>
+
       <div className="clock-card date-card">
         <div>
           {

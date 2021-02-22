@@ -150,9 +150,6 @@ function App() {
   return (
     <div className="card-wrapper">
       <div className="header-row">
-      <div className="clock-card logo">
-
-      </div>
         <Clock />
       </div>
       <div className="second-row">

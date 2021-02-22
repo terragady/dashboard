@@ -18,7 +18,14 @@ export const FinanceChart = ({ data }) => {
       alias: "Cummulative",
       sync: true,
       nice: true,
-      formatter: function (val) { return val / 1000 + "k NOK"; }
+      formatter: function (val) { 
+        let res
+        if (Math.abs(val) < 1000) {return val + "NOK"}
+        else if (Math.abs(val) >= 1000 && Math.abs(val) < 1000000){
+        return val / 1000 + "k NOK"; }
+        else {return Math.ceil(val / 1000000) + "," + (Math.abs(val) - 1000000)/1000 + "k NOK"}
+      
+      }
     },
     month: { sync: true }
   }

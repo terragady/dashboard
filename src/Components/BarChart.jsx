@@ -21,7 +21,7 @@ export const BarChart = ({ data }) => {
 
   return (
     <Chart padding="auto" scale={scale} data={data} autoFit interactions={['active-region']} filter={[
-      ['value', val => val > 0.1]]} >
+      ['value', val => val > 0.01]]} >
       <Interval
         adjust={[
           {

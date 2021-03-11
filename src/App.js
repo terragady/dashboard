@@ -29,7 +29,7 @@ function App() {
 
 
   const fetchFromSheets = () => {
-    fetch(url, {mode: 'no-cors'}).then(response => response.json()).then(data => {
+    fetch(url).then(response => response.json()).then(data => {
       const weeksBehind = 25
       // fetch hours
       let datasets = [];

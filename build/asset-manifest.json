@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.6daf79cf.chunk.css",
-    "main.js": "/static/js/main.cc624b71.chunk.js",
-    "main.js.map": "/static/js/main.cc624b71.chunk.js.map",
+    "main.css": "/static/css/main.d2a90c85.chunk.css",
+    "main.js": "/static/js/main.4f80163a.chunk.js",
+    "main.js.map": "/static/js/main.4f80163a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.87547f60.js",
     "runtime-main.js.map": "/static/js/runtime-main.87547f60.js.map",
     "static/js/2.5f09f30f.chunk.js": "/static/js/2.5f09f30f.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.e1786aa2.chunk.js": "/static/js/3.e1786aa2.chunk.js",
     "static/js/3.e1786aa2.chunk.js.map": "/static/js/3.e1786aa2.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.6daf79cf.chunk.css.map": "/static/css/main.6daf79cf.chunk.css.map",
+    "static/css/main.d2a90c85.chunk.css.map": "/static/css/main.d2a90c85.chunk.css.map",
     "static/js/2.5f09f30f.chunk.js.LICENSE.txt": "/static/js/2.5f09f30f.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/YallowLifeScience.d43a7e49.png"
   },
   "entrypoints": [
     "static/js/runtime-main.87547f60.js",
     "static/js/2.5f09f30f.chunk.js",
-    "static/css/main.6daf79cf.chunk.css",
-    "static/js/main.cc624b71.chunk.js"
+    "static/css/main.d2a90c85.chunk.css",
+    "static/js/main.4f80163a.chunk.js"
   ]
 }

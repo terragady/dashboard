@@ -118,13 +118,13 @@ function App() {
         NEWoffers.push({ name: "Wins", "week": e, "value": parseInt(wins) })
       })
 
-      if (JSON.stringify(offers) !== JSON.stringify(NEWoffers)){setOffers(NEWoffers)}
-      if (JSON.stringify(sales) !== JSON.stringify(newSales)){setSales(newSales);}
-        if (JSON.stringify(finance) !== JSON.stringify(NEW_Finance)){setFinance(NEW_Finance);}
-          if (JSON.stringify(diffData) !== JSON.stringify({ instaNewFollPosts, linkedNewFollPosts })){setDiffData({ instaNewFollPosts, linkedNewFollPosts })}
-          if (JSON.stringify(linked) !== JSON.stringify({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })){setLinked({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })}
-          if (JSON.stringify(sheet) !== JSON.stringify(datasets)){setSheet(datasets)}
-            if (JSON.stringify(overallAvg) !== JSON.stringify(NewOverallAvg)){setOverallAvg(NewOverallAvg)}
+      if (JSON.stringify(offers) !== JSON.stringify(NEWoffers)) { setOffers(NEWoffers) }
+      if (JSON.stringify(sales) !== JSON.stringify(newSales)) { setSales(newSales); }
+      if (JSON.stringify(finance) !== JSON.stringify(NEW_Finance)) { setFinance(NEW_Finance); }
+      if (JSON.stringify(diffData) !== JSON.stringify({ instaNewFollPosts, linkedNewFollPosts })) { setDiffData({ instaNewFollPosts, linkedNewFollPosts }) }
+      if (JSON.stringify(linked) !== JSON.stringify({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] })) { setLinked({ foll: data.valueRanges[3].values[0], posts: data.valueRanges[4].values[0] }) }
+      if (JSON.stringify(sheet) !== JSON.stringify(datasets)) { setSheet(datasets) }
+      if (JSON.stringify(overallAvg) !== JSON.stringify(NewOverallAvg)) { setOverallAvg(NewOverallAvg) }
     })
   }
 
@@ -141,10 +141,10 @@ function App() {
     const interval = setInterval(() => {
       fetchFromSheets();
       fetchFromInstagram();
-    }, 
-    // 5000
-    3600000
-    // 300000
+    },
+      // 5000
+      3600000
+      // 300000
     );
 
     return () => clearInterval(interval)
@@ -173,7 +173,8 @@ function App() {
           <div className="card-small">
             <div className="card-title">Instagram Posts:</div>
             <div className="card-value">{insta.posts ? insta.posts : <BarLoader color="darkgrey" size={12} />}</div>
-          </div>        </div>        <div className="first-row">
+          </div>
+        </div>        <div className="first-row">
 
 
           <div className="card-small">

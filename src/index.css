@@ -30,7 +30,7 @@ body {
 
 .card-small-plus {
   flex-grow: 1;
-  height: 20vh;
+  height: 18vh;
   width: 40%;
   border-radius: 10px;
   padding: 20px;
@@ -41,7 +41,7 @@ body {
 
 .card-small {
   flex-grow: 1;
-  min-height: 5vh;
+  min-height: 3vh;
   border-radius: 10px;
   padding: 10px;
   background-color: rgba(255, 255, 255, 1);
